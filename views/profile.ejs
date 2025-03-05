@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body style="background-color: antiquewhite;">
+    <div class="container mt-4">
+        <h2>Update Profile</h2>
+        <form action="/profile/update" method="POST" enctype="multipart/form-data">
+            <% if(locals.error){ %>
+            <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+            <div class="mb-3">
+                <label for="full_name" class="form-label">Full Name</label>
+                <input type="text" name="full_name" value="<%= (employee && employee.full_name) || user.username || '' %>" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">New Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Leave blank to keep current password">
+            </div>
+            <% if (employee) { %>
+                <div class="mb-3">
+                    <label for="sex" class="form-label">Sex</label>
+                    <select class="form-control" name="sex" required>
+                        <option value="Male" <%= employee.sex === 'Male' ? 'selected' : '' %>>Male</option>
+                        <option value="Female" <%= employee.sex === 'Female' ? 'selected' : '' %>>Female</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="picture" class="form-label">Profile Picture</label>
+                    <input type="file" class="form-control" name="picture" accept="image/*" id="pictureInput">
+                </div>
+                <% if (employee.picture) { %>
+                    <p>Current Profile Picture:</p>
+                    <img src="/uploads/<%= employee.picture %>" alt="Profile Picture" class="img-thumbnail" width="150" id="previewImage">
+                <% } else { %>
+                    <img src="" alt="Selected Image Preview" class="img-thumbnail d-none" width="150" id="previewImage">
+                <% } %>
+            <% } %>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+        <a href="/dashboard" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    </div>
+
+    <script>
+        document.getElementById('pictureInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+                    previewImage.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

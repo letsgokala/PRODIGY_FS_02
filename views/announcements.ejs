@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Announcements</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body styel="background-color: antiquewhite;">
+    <div class="container mt-5">
+        <h2>Manage Announcements</h2>
+
+        <% if (locals.success) { %>
+            <div class="alert alert-success"><%= success %></div>
+        <% } %>
+
+        <form action="/announcements" method="POST">
+            <textarea name="message" class="form-control mb-2" placeholder="Enter announcement..." required></textarea>
+            <button type="submit" class="btn btn-primary">Post Announcement</button>
+        </form>
+
+        <h3 class="mt-4">Previous Announcements</h3>
+        <% if (announcements.length === 0) { %>
+            <p>No announcements yet.</p>
+        <% } else { %>
+            <ul class="list-group">
+                <% announcements.forEach(announcement => { %>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span><%= announcement.message %> 
+                            <small class="text-muted">(<%= new Date(announcement.created_at).toLocaleString() %>)</small>
+                        </span>
+                        <form action="/announcements/delete/<%= announcement.id %>" method="POST">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <a href="/dashboard" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    </div>
+</body>
+</html>
