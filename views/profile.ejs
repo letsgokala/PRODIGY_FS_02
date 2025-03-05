@@ -9,6 +9,10 @@
 <body style="background-color: antiquewhite;">
     <div class="container mt-4">
         <h2>Update Profile</h2>
+        <% if (locals.message) { %>
+            <div class="alert alert-success"><%= message %></div>
+        <% } %>
+        
         <form action="/profile/update" method="POST" enctype="multipart/form-data">
             <% if(locals.error){ %>
             <div class="alert alert-danger"><%= error %></div>

@@ -35,7 +35,7 @@ router.get("/", isAuthenticated, async (req, res) => {
         const employeeResult = await pool.query("SELECT * FROM employees WHERE user_id = $1", [user.id]);
         const userResult = await pool.query("SELECT * FROM users WHERE id = $1", [user.id]);
 
-        res.render("profile", { user, employee: employeeResult.rows[0] || null, current: userResult.rows[0] });
+        res.render("profile", { user, employee: employeeResult.rows[0] || null, current: userResult.rows[0], message: req.query.message });
     } catch (err) {
         console.error(err);
         res.status(500).send("Server error");
@@ -89,7 +89,7 @@ router.post("/update", isAuthenticated, upload.single("picture"), async (req, re
         req.session.user.username = full_name;
         if (picture) req.session.user.picture = picture;
 
-        res.redirect("/profile");
+        res.redirect("/profile?message=updated successfully");
     } catch (err) {
         console.error(err);
         res.status(500).send("Error updating profile");

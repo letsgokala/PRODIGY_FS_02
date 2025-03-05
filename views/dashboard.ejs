@@ -15,6 +15,7 @@
                 <ul class="navbar-nav">
                     <% if (user.role === "employee") { %>
                         <li class="nav-item"><a class="nav-link" href="/leave">Request Leave</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profile">Edit profile</a></li>
                     <% } else if (user.role === "manager") { %>
                         <li class="nav-item"><a class="nav-link" href="/manage-leave">Manage Leave Requests</a></li>
                         <li class="nav-item"><a class="nav-link" href="/announcements">Manage Announcements</a></li>
