@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Employee</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body style="background-color: antiquewhite;">
-    <div class="container">
-        <h2>Edit Employee</h2>
-        <form action="/employees/edit/<%= employee.id %>" method="POST">
-            <label for="full_name">full name</label>
-            <input type="text" name="full_name" class="form-control mb-2" value="<%= employee.full_name %>" required>
-            <label for="sex">sex</label>
-            <div class="mb-3">
-                <select name="sex" id="sex" class="form-control">
-                    <option value="Male"  <%= employee.sex === 'Male' ? 'selected' : '' %>>Male</option>
-                    <option value="Female"<%= employee.sex === 'Female' ? 'selected' : '' %>>Female</option>
-                </select>
-            </div>
-            <label for="position">position</label>
-            <input type="text" name="position" class="form-control mb-2" value="<%= employee.position %>" required>
-            <label for="department">department</label>
-            <input type="text" name="department" class="form-control mb-2" value="<%= employee.department %>" required>
-            <label for="salary">salary</label>
-            <input type="number" name="salary" class="form-control mb-2" value="<%= employee.salary %>" required>
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-        <a href="/dashboard" class="btn btn-secondary mt-3"> <i class="bi bi-arrow-left"></i> Back to Dashboard</a>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Employee</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    </head>
+    <body style="background-color: antiquewhite;">
+        <div class="container">
+            <h2>Edit Employee</h2>
+            <form action="/employees/edit/<%= employee.id %>" method="POST">
+                <label for="full_name">full name</label>
+                <input type="text" name="full_name" class="form-control mb-2" value="<%= employee.full_name %>" required>
+                <label for="sex">sex</label>
+                <div class="mb-3">
+                    <select name="sex" id="sex" class="form-control">
+                        <option value="Male"  <%= employee.sex === 'Male' ? 'selected' : '' %>>Male</option>
+                        <option value="Female"<%= employee.sex === 'Female' ? 'selected' : '' %>>Female</option>
+                    </select>
+                </div>
+                <label for="position">position</label>
+                <input type="text" name="position" class="form-control mb-2" value="<%= employee.position %>" required>
+                <label for="department">department</label>
+                <input type="text" name="department" class="form-control mb-2" value="<%= employee.department %>" required>
+                <label for="salary">salary</label>
+                <input type="number" name="salary" class="form-control mb-2" value="<%= employee.salary %>" required>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-pencil"></i> Update
+                </button>
+            </form>
+            <a href="/dashboard" class="btn btn-secondary mt-3"> <i class="bi bi-arrow-left"></i> Back to Dashboard</a>
+        </div>
+    </body>
 </html>
